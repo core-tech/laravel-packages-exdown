@@ -65,7 +65,8 @@ class ExdownServiceProvider extends ServiceProvider {
 			$ip = \Request::getClientIp();
 			$ips = $this->app['config']->get('exdown::allowed_ips', array());
 
-			! in_array($ip, $ips) and die(\View::make('exdown::exdown'));
+			$view = $this->app['config']->get('exdown::view', 'exdown::exdown');
+			! in_array($ip, $ips) and die(\View::make($view));
 		}
 	}
 
